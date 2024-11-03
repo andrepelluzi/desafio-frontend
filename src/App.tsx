@@ -1,11 +1,20 @@
-import './App.css'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { createGlobalStyle } from 'styled-components'
 
-const App = () => {
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, sans-serif;
+    background-color: #f5f5f5;
+  }
+`
+
+function App() {
   return (
-    <div className='content'>
-      <h1>Rsbuild with React</h1>
-      <p>Start building amazing things with Rsbuild.</p>
-    </div>
+    <Router>
+      <GlobalStyle />
+    </Router>
   )
 }
 
