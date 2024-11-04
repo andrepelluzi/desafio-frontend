@@ -1,5 +1,6 @@
 import { BrowserRouter as Router } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
+import UserDisplay from './components/UserDisplay'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -14,6 +15,7 @@ function App() {
   return (
     <Router>
       <GlobalStyle />
+      <UserDisplay />
     </Router>
   )
 }
