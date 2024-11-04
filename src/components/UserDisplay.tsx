@@ -1,5 +1,7 @@
 import type React from 'react'
 import { useState } from 'react'
+import { LayoutGrid, List } from 'lucide-react'
+
 import {
   Card,
   CardGrid,
@@ -44,14 +46,14 @@ const UserDisplay: React.FC = () => {
             onClick={() => setViewType('card')}
             aria-pressed={viewType === 'card'}
           >
-            Visualização em Cards
+            <LayoutGrid aria-label='Visualização em Card' />
           </ViewToggle>
           <ViewToggle
             $$isActive={viewType === 'table'}
             onClick={() => setViewType('table')}
             aria-pressed={viewType === 'table'}
           >
-            Visualização em Tabela
+            <List aria-label='Visualização em Tabela' />
           </ViewToggle>
         </div>
       </Header>
