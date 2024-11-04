@@ -14,6 +14,10 @@ describe('UserDisplay', () => {
     mockedGetUsers.mockResolvedValue(mockUsers)
   })
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   it('renderiza o estado de carregamento inicialmente', () => {
     renderWithRouter(<UserDisplay />)
 
@@ -38,11 +42,15 @@ describe('UserDisplay', () => {
       expect(screen.getByText('João Silva')).toBeInTheDocument()
     })
 
-    await userEvent.click(screen.getByText('Visualização em Tabela'))
-    expect(screen.getByRole('table')).toBeInTheDocument()
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Visualização em Tabela' })
+    )
+    expect(screen.getByRole('grid')).toBeInTheDocument()
 
-    await userEvent.click(screen.getByText('Visualização em Cards'))
-    expect(screen.queryByRole('table')).not.toBeInTheDocument()
+    await userEvent.click(
+      screen.getByRole('button', { name: 'Visualização em Card' })
+    )
+    expect(screen.queryByRole('grid')).not.toBeInTheDocument()
   })
 
   it('filtra usuários com base no termo de busca', async () => {
@@ -59,6 +67,26 @@ describe('UserDisplay', () => {
     await waitFor(() => {
       expect(screen.queryByText('João Silva')).not.toBeInTheDocument()
       expect(screen.getByText('Maria Santos')).toBeInTheDocument()
+    })
+
+    await user.clear(searchInput)
+  })
+
+  it('persiste o termo de busca na URL', async () => {
+    const user = userEvent.setup()
+    renderWithRouter(<UserDisplay />)
+
+    await waitFor(() => {
+      expect(screen.getByRole('searchbox')).toBeInTheDocument()
+    })
+
+    const searchInput = screen.getByRole('searchbox')
+    await user.type(searchInput, 'Maria')
+
+    await waitFor(() => {
+      expect(new URLSearchParams(window.location.search).get('busca')).toBe(
+        'Maria'
+      )
     })
   })
 
