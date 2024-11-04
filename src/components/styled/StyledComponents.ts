@@ -1,4 +1,11 @@
 import styled from 'styled-components'
+import {
+  Header as AriaHeader,
+  Input as AriaInput,
+  Button as AriaButton,
+  Table as AriaTable,
+  Label as AriaLabel
+} from 'react-aria-components'
 
 const borderRadius = '4px'
 const boxShadow = '0 0 0 3px rgba(0, 102, 204, 0.2)'
@@ -9,11 +16,11 @@ export const Container = styled.div`
   padding: 20px;
 `
 
-export const Header = styled.header`
+export const Header = styled(AriaHeader)`
   margin-bottom: 2rem;
 `
 
-export const SearchInput = styled.input`
+export const SearchInput = styled(AriaInput)`
   width: 100%;
   padding: 0.75rem;
   border: 2px solid #ccc;
@@ -32,7 +39,7 @@ export const SearchInput = styled.input`
   }
 `
 
-export const ViewToggle = styled.button<{ $$isActive: boolean }>`
+export const ViewToggle = styled(AriaButton)<{ $$isActive: boolean }>`
   padding: 0.5rem 1rem;
   margin-right: 1rem;
   border: 1px solid #ccc;
@@ -74,7 +81,7 @@ export const Card = styled.div`
   }
 `
 
-export const Table = styled.table`
+export const Table = styled(AriaTable)`
   width: 100%;
   border-collapse: collapse;
   margin-top: 1rem;
@@ -100,7 +107,7 @@ export const SearchWrapper = styled.div`
   margin-bottom: 1rem;
 `
 
-export const Label = styled.label`
+export const Label = styled(AriaLabel)`
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;

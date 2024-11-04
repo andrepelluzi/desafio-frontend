@@ -10,9 +10,9 @@ import {
   Label,
   SearchInput,
   SearchWrapper,
-  Table,
   ViewToggle
 } from './styled/StyledComponents'
+import { UsersTable } from './UsersTable'
 import { useUsers } from '../hooks/useUsers'
 import { useSearch } from '../hooks/useSearch'
 import type { User } from '../types/User'
@@ -43,14 +43,14 @@ const UserDisplay: React.FC = () => {
         <div>
           <ViewToggle
             $$isActive={viewType === 'card'}
-            onClick={() => setViewType('card')}
+            onPress={() => setViewType('card')}
             aria-pressed={viewType === 'card'}
           >
             <LayoutGrid aria-label='Visualização em Card' />
           </ViewToggle>
           <ViewToggle
             $$isActive={viewType === 'table'}
-            onClick={() => setViewType('table')}
+            onPress={() => setViewType('table')}
             aria-pressed={viewType === 'table'}
           >
             <List aria-label='Visualização em Tabela' />
@@ -62,31 +62,14 @@ const UserDisplay: React.FC = () => {
         <CardGrid>
           {users.map((user: User) => (
             <Card key={user.id}>
-              <h3>{user.name}</h3>
+              <h2>{user.name}</h2>
               <p>Email: {user.email}</p>
               <p>Telefone: {user.phone}</p>
             </Card>
           ))}
         </CardGrid>
       ) : (
-        <Table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Telefone</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user: User) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+        <UsersTable users={users} />
       )}
     </Container>
   )
