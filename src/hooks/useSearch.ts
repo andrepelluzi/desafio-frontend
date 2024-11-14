@@ -7,16 +7,26 @@ import { useSearchParams } from 'react-router-dom'
  * @returns Um objeto com as seguintes propriedades:
  * - `searchTerm`: o termo de busca atual a partir da URL.
  * - `updateSearchTerm`: uma função para atualizar o termo de busca na URL.
+ *
+ * A função `updateSearchTerm` atualiza o valor do parâmetro `busca` na URL
+ * sem alterar ou remover outros parâmetros.
  */
 export const useSearch = () => {
   const [searchParams, setSearchParams] = useSearchParams()
+
   const searchTerm = searchParams.get('busca') || ''
 
   const updateSearchTerm = useCallback(
     (term: string) => {
-      setSearchParams({ busca: term })
+      const params = new URLSearchParams(searchParams)
+      if (term) {
+        params.set('busca', term)
+      } else {
+        params.delete('busca')
+      }
+      setSearchParams(params)
     },
-    [setSearchParams]
+    [searchParams, setSearchParams]
   )
 
   return {

@@ -59,9 +59,9 @@ const UserDisplay: React.FC = () => {
       </Header>
 
       {viewType === 'card' ? (
-        <CardGrid>
+        <CardGrid role='list'>
           {users.map((user: User) => (
-            <Card key={user.id}>
+            <Card key={user.id} role='listitem'>
               <h2>{user.name}</h2>
               <p>Email: {user.email}</p>
               <p>Telefone: {user.phone}</p>

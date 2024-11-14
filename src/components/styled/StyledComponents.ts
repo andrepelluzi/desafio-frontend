@@ -4,7 +4,7 @@ import {
   Input as AriaInput,
   Button as AriaButton,
   Table as AriaTable,
-  Label as AriaLabel
+  Label as AriaLabel,
 } from 'react-aria-components'
 
 const borderRadius = '4px'
